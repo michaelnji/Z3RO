@@ -1,8 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { fileURLToPath } from 'node:url';
+import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
-  devtools: { enabled: true },
-
+  devtools: { enabled: false },
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
   modules: [
     '@nuxt/fonts',
     '@nuxt/icon',
@@ -12,8 +18,11 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@vueuse/nuxt',
     '@unocss/nuxt',
-    '@nuxtjs/tailwindcss'
+    // '@nuxtjs/tailwindcss',
+    'shadcn-nuxt'
   ],
+  // css: ['~/assets/css/tailwind.css'],
+
   icon: {
     customCollections: [
       {
@@ -45,11 +54,15 @@ export default defineNuxtConfig({
   },
   fonts: {
     defaults: {
-      weights: [300, 400, 500, 600, 700, 800, 900],
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
       styles: ['normal', 'italic'],
 
     },
     // use ~public/fonts for your font files
     provider: 'local'
+  },
+  shadcn: {
+    prefix: '',
+    componentDir: './components/ui'
   }
 })
