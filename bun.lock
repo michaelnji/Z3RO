@@ -32,6 +32,8 @@
       },
       "devDependencies": {
         "@biomejs/biome": "1.9.4",
+        "@iconify-json/cryptocurrency-color": "^1.2.2",
+        "@iconify-json/flag": "^1.2.5",
         "@iconify-json/solar": "^1.2.2",
         "@unocss/nuxt": "^66.1.0-beta.6",
         "@unocss/preset-rem-to-px": "^66.1.0-beta.6",
@@ -194,6 +196,10 @@
     "@floating-ui/utils": ["@floating-ui/utils@0.2.9", "", {}, "sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg=="],
 
     "@floating-ui/vue": ["@floating-ui/vue@1.1.6", "", { "dependencies": { "@floating-ui/dom": "^1.0.0", "@floating-ui/utils": "^0.2.9", "vue-demi": ">=0.13.0" } }, "sha512-XFlUzGHGv12zbgHNk5FN2mUB7ROul3oG2ENdTpWdE+qMFxyNxWSRmsoyhiEnpmabNm6WnUvR1OvJfUfN4ojC1A=="],
+
+    "@iconify-json/cryptocurrency-color": ["@iconify-json/cryptocurrency-color@1.2.2", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-gQuPm9hRJQNQjaPenUdQe5/vtrEraLQQyXbaNeddaFCdfSfi/gP9g9lG1K9j0CuCE3P3gd/lwDYrv3FoHYn4tQ=="],
+
+    "@iconify-json/flag": ["@iconify-json/flag@1.2.5", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-anxkEI4tfW5zNRPqh/fUa60YAIr8478+30DntF32rM2d1FKor/KtYByYgAQLHUt5ndN9sV6wH83i6MpCZkq/dA=="],
 
     "@iconify-json/solar": ["@iconify-json/solar@1.2.2", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-lcTb6DWL4HZObiY1W3fHfuxxuQHUc6CFHFeywKEx7Ry0k+dU6POZCMC7oVLr0F8vuf+KgaQ3oOoGO/yFzOwrNg=="],
 
