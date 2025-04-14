@@ -19,7 +19,8 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@unocss/nuxt',
     // '@nuxtjs/tailwindcss',
-    'shadcn-nuxt'
+    'shadcn-nuxt',
+    'nuxt-time'
   ],
   // css: ['~/assets/css/tailwind.css'],
 

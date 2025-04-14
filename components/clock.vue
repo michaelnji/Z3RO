@@ -1,14 +1,26 @@
 <script lang="ts" setup>
+import { format, getHours } from "date-fns";
+const now = useNow()
+const currentHour = getHours(now.value)
+const formatStr = 'hh:mm'
+const formatStrDate = 'do MMMM y'
+const formattedTime = computed(() => {
+    return format(now.value, formatStr)
+})
+const formattedDate = computed(() => {
+    return format(now.value, formatStrDate)
+})
+
 
 </script>
 <template>
     <div class="flex flex-col justify-center items-center">
-        <h1 class=" font-fifa clock font-bold leading-none  tracking-wide text-9xl">15:49</h1>
+        <h1 class=" font-fifa clock font-bold leading-none  tracking-wide text-9xl">{{ formattedTime }}</h1>
 
         <div class="flex mt2 items-center justify-between gap-x-6">
             <div class="flex items-center gap-1">
                 <Icon name="solar:calendar-outline" size="24" />
-                <h3 class=" text-lg">20th June 2025</h3>
+                <h3 class=" text-lg">{{ formattedDate }}</h3>
             </div>
             <div class="flex items-center gap-1">
                 <Icon name="solar:cloud-bold-duotone" size="24" />
