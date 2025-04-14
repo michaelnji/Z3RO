@@ -1,7 +1,6 @@
 <script lang="ts" setup>
-import { format, getHours } from "date-fns";
+import { format } from "date-fns";
 const now = useNow()
-const currentHour = getHours(now.value)
 const formatStr = 'hh:mm'
 const formatStrDate = 'do MMMM y'
 const formattedTime = computed(() => {
@@ -15,7 +14,7 @@ const formattedDate = computed(() => {
 </script>
 <template>
     <div class="flex flex-col justify-center items-center">
-        <h1 class=" font-fifa clock font-bold leading-none  tracking-wide text-9xl">{{ formattedTime }}</h1>
+        <h1 class=" font-panton clock font-bold leading-none  tracking-wide text-9xl">{{ formattedTime }}</h1>
 
         <div class="flex mt2 items-center justify-between gap-x-6">
             <div class="flex items-center gap-1">

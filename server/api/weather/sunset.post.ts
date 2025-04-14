@@ -2,6 +2,29 @@
 import type { DayInfo } from '~/server/types/index.types'
 import { sendServerResponse } from '~/server/utils/response'
 
+/**
+ * Handles an HTTP POST request to fetch sunset and sunrise information for a given location and date.
+ *
+ * @async
+ * @function
+ * @param {H3Event} event - The incoming HTTP event object.
+ * @returns {Promise<void>} A promise that resolves with the server response.
+ *
+ * @throws Will return a 400 status code if the request payload is invalid or missing required fields.
+ * @throws Will return a 500 status code if an error occurs during the fetch operation or other unexpected errors.
+ *
+ * @remarks
+ * The function expects the request body to contain the following fields:
+ * - `lat` (number): Latitude of the location.
+ * - `lng` (number): Longitude of the location.
+ * - `date` (string): Date for which the sunrise and sunset information is requested.
+ * - `tzid` (string): Timezone identifier.
+ * - `formatted` (0 | 1): Whether the response should be formatted (1) or not (0).
+ *
+ * The function constructs a URL to call the `https://api.sunrise-sunset.org/json` API with the provided parameters.
+ * If the fetch operation is successful, it returns the data with a 200 status code.
+ * If the fetch operation fails, it returns a 500 status code with an appropriate error message.
+ */
 export default eventHandler(async (event) => {
    try{
     const body = await readBody<{
@@ -22,7 +45,7 @@ export default eventHandler(async (event) => {
 
         const resp = await $fetch(constructedUrl)
         const data = resp as DayInfo
-        
+
         setResponseStatus(event, 200)
         return sendServerResponse(200, 'success', data)
     } catch (error) {
