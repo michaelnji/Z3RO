@@ -39,8 +39,8 @@ onMounted(async () => {
     <div>
         <div class="rounded-3xl bg-white p6">
             <h3 class="uppercase opacity-80 text-base mb2">Time Metrics</h3>
-            <Skeleton v-if="isLoading" class="w-full h-2.4rem bg-stone-100 rounded-xl" />
-            <Skeleton v-if="isLoading" class="w-full h-2.4rem mt2 bg-stone-100 rounded-xl" />
+            <Skeleton v-if="isLoading" class="w-full h-2.2rem bg-stone-100 rounded-xl" />
+            <Skeleton v-if="isLoading" class="w-full h-2.2rem mt2 bg-stone-100 rounded-xl" />
             <h2 v-if="!isLoading && data" class="text-3xl font-bold">
                 Day will last for <b class="underline underline-dashed  font-action text-amber-600">{{
                     secondsToHours(data.results.day_length) }} hours</b>
