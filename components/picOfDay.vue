@@ -1,31 +1,95 @@
 <script lang="ts" setup>
-const img1 = "https://s3.nyeki.dev/nekos-api/images/original/81af12cc-7cb1-43fe-965d-1c4a6c581c1e.webp"
-const img2 = 'https://s3.nyeki.dev/nekos-api/images/original/81af12cc-7cb1-43fe-965d-1c4a6c581c1e.webp'
-const img3 = 'https://s3.nyeki.dev/nekos-api/images/original/ce757f05-0af1-491c-8654-1ee144c4ce1d.webp'
+import type {
+    NekoImage,
+    ServerResponse,
+    StatusCode,
+} from "~/server/types/index.types";
+
+const isLoading = ref(true);
+const data = ref<NekoImage[] | null>(null);
+onMounted(async () => {
+    try {
+        const response = await $fetch<ServerResponse<StatusCode, NekoImage[]>>(
+            "/api/anime/images",
+            {
+                method: "GET",
+            },
+        );
+        if (response.ok && response.data) {
+            isLoading.value = false;
+            data.value = response.data;
+            console.log(data.value);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+});
 </script>
 <template>
     <div>
-        <div class="p6 flex">
-            <div class="p3 bg-red-300 rounded-2xl  -rotate-8 -z-1 w-max">
-                <img :src="img1" alt="" class="rounded-xl object-contain ">
-                <div class="mt2">
-                    <h2 class="text-base font-extrabold">#1299</h2>
-                </div>
+        <div class="p3 flex justify-center">
+            <div
+                class="p3 bg-red-300 rounded-2xl  hover:!scale-125 hover:rotate-8 hover:skew-y-2 transition-all duration-150 -rotate-8 z-0 hover:!z-1 !w-8rem">
+                <Skeleton v-if="isLoading" class=" h-12rem bg-red-200 rounded-2xl !w-full" />
+
+
+                <NuxtImg v-if="!isLoading && data" :src="data[0].url" alt=""
+                    class="rounded-xl object-contain mxa h-12rem wmax " width="100" height="150" :custom="true"
+                    v-slot="{ src, isLoaded, imgAttrs }">
+                    <!-- Show the actual image when loaded -->
+                    <img v-if="isLoaded" v-bind="imgAttrs" :src="src" class="rounded-xl object-contain">
+
+                    <!-- Show a placeholder while loading -->
+                    <Skeleton v-if="!isLoaded" class=" h-12rem bg-red-200 rounded-2xl w-full" />
+                </NuxtImg>
+
+                <!-- <div v-if="!isLoading && data" class="mt1">
+                    <h2 class="text-base font-extrabold">{{ data[0].artist_name }}</h2>
+                </div> -->
             </div>
-            <div class="p3 bg-amber-300 rounded-2xl w-max">
-                <img :src="img2" alt="" class="rounded-xl object-contain ">
-                <div class="mt2">
-                    <h2 class="text-base z-1 font-extrabold">#1012</h2>
-                </div>
+            <div
+                class="p3 bg-green-300 rounded-2xl hover:scale-125 hover:rotate-8 hover:-skew-y-2 transition-all duration-150  z-1 !w-8rem">
+                <Skeleton v-if="isLoading" class=" h-12rem bg-green-200 rounded-2xl !w-full" />
+
+
+                <NuxtImg v-if="!isLoading && data" :src="data[1].url" alt=""
+                    class="rounded-xl object-contain mxa h-12rem wmax " width="100" height="150" :custom="true"
+                    v-slot="{ src, isLoaded, imgAttrs }">
+
+                    <!-- Show the actual image when loaded -->
+                    <img v-if="isLoaded" v-bind="imgAttrs" :src="src" class="rounded-xl object-contain">
+
+                    <!-- Show a placeholder while loading -->
+                    <Skeleton v-if="!isLoaded" class=" h-12rem bg-green-200 rounded-2xl w-full" />
+                </NuxtImg>
+
+                <!-- <div v-if="!isLoading && data" class="mt1">
+                    <h2 class="text-base font-extrabold">{{ data[1].artist_name }}</h2>
+                </div> -->
             </div>
-            <div class="p3 bg-green-200 rounded-2xl rotate-8 -z-1 w-max">
-                <img :src="img3" alt="" class="rounded-xl object-contain ">
-                <div class="mt2">
-                    <h2 class="text-base font-extrabold">#8143</h2>
-                </div>
+            <div
+                class="p3 bg-blue-300 rounded-2xl  hover:scale-125 hover:-rotate-8 hover:-skew-y-2 transition-all duration-150  rotate-8  z-0 hover:z-1 !w-8rem">
+                <Skeleton v-if="isLoading" class=" h-12rem bg-blue-200 rounded-2xl !w-full" />
+
+
+                <NuxtImg v-if="!isLoading && data" :src="data[2].url" alt=""
+                    class="rounded-xl object-contain mxa h-12rem wmax " width="100" height="150" :custom="true"
+                    v-slot="{ src, isLoaded, imgAttrs }">
+
+                    <!-- Show the actual image when loaded -->
+                    <img v-if="isLoaded" v-bind="imgAttrs" :src="src" class="rounded-xl object-contain">
+
+                    <!-- Show a placeholder while loading -->
+                    <Skeleton v-if="!isLoaded" class=" h-12rem bg-blue-200 rounded-2xl w-full" />
+                </NuxtImg>
+
+                <!-- <div v-if="!isLoading && data" class="mt1">
+                    <h2 class="text-base font-extrabold">{{ data[2].artist_name }}</h2>
+                </div> -->
             </div>
 
+
         </div>
-        <h2 class="font-bold font-action text-5xl text-center ">Neko of the day!</h2>
+        <h2 class="font-bold font-japanese text-4xl text-center ">Random Neko</h2>
     </div>
 </template>

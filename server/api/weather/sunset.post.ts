@@ -41,6 +41,15 @@ export default eventHandler(async (event) => {
         return sendServerResponse(400, 'Invalid payload, one or more fields are missing')
     }
 
+       if (typeof body.lat !== 'number' ||
+           typeof body.lng !== 'number' ||
+           typeof body.date !== 'string' ||
+           typeof body.tzid !== 'string' ||
+           (body.formatted !== 0 && body.formatted !== 1)) {
+           setResponseStatus(event, 400)
+           return sendServerResponse(400, 'Invalid payload, fields have incorrect types')
+       }
+
         const constructedUrl = `https://api.sunrise-sunset.org/json?lat=${body.lat}&lng=${body.lng}&formatted=${body.formatted}&date=${body.date}&tzid=${body.tzid}`
 
         const resp = await $fetch(constructedUrl)
@@ -50,6 +59,12 @@ export default eventHandler(async (event) => {
         return sendServerResponse(200, 'success', data)
     } catch (error) {
         setResponseStatus(event, 500)
-        return sendServerResponse(500, `${error}`.includes("fetch failed") ? "fetch failed" : `${error}`)
+       let message: string;
+       if (error instanceof Error) {
+           message = error.message;
+       } else {
+           message = String(error);
+       }
+       return sendServerResponse(500, message.includes("fetch failed") ? "fetch failed" : message);
     }
 })
