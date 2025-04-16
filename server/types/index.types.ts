@@ -14,7 +14,24 @@ export type DayInfo = {
     status: string;
     tzid: string;
 };
-
+export type CurrencyBeaconResponse = {
+	meta: {
+		code: number;
+		disclaimer: string;
+	};
+	response: {
+		date: string;
+		base: string;
+		rates: {
+			[quote: string]: number;
+		};
+	};
+	date: string;
+	base: string;
+	rates: {
+		[quote: string]: number;
+	};
+};
 export type NekoImage = {
 
     artist_href: string,
@@ -23,10 +40,13 @@ export type NekoImage = {
     url: string
 
 };
-
+export type PairRate = {
+	pair: string;
+	rate: number;
+};
 export type StatusCode = 200 | 400 | 404 | 403 | 500 | 401;
 export type ErrorCodes = 400 | 404 | 403 | 500 | 401;
-export type ServerData = null | DayInfo | NekoImage[];
+export type ServerData = null | DayInfo | NekoImage[] | PairRate[];
 export interface ServerResponse<
     Status extends StatusCode,
     Data extends ServerData,
