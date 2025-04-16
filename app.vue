@@ -4,7 +4,7 @@ import './assets/css/custom.css'
 import './assets/css/theme.css'
 </script>
 <template>
-  <div class=" bg-3">
+  <div class=" bg-3 hscreen">
     <NuxtLayout>
       <div>
         <NuxtPage />

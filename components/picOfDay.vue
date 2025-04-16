@@ -4,22 +4,14 @@ import type {
     ServerResponse,
     StatusCode,
 } from "~/server/types/index.types";
+import { useAnimeImageStore } from "~/stores/anime-images.store";
 
 const isLoading = ref(true);
-const data = ref<NekoImage[] | null>(null);
+const animeImageStore = useAnimeImageStore();
 onMounted(async () => {
     try {
-        const response = await $fetch<ServerResponse<StatusCode, NekoImage[]>>(
-            "/api/anime/images",
-            {
-                method: "GET",
-            },
-        );
-        if (response.ok && response.data) {
-            isLoading.value = false;
-            data.value = response.data;
-            console.log(data.value);
-        }
+        await animeImageStore.fetchImagesFromStorage()
+        isLoading.value = false;
     } catch (error) {
         console.log(error);
 
@@ -34,8 +26,8 @@ onMounted(async () => {
                 <Skeleton v-if="isLoading" class=" h-12rem bg-red-200 rounded-2xl !w-full" />
 
 
-                <NuxtImg v-if="!isLoading && data" :src="data[0].url" alt=""
-                    class="rounded-xl object-contain mxa h-12rem wmax " width="100" height="150" :custom="true"
+                <NuxtImg v-if="!isLoading && animeImageStore.images" :src="animeImageStore.images[0].url" alt=""
+                    class="rounded-xl object-contain mxa h-12rem wmax " :custom="true"
                     v-slot="{ src, isLoaded, imgAttrs }">
                     <!-- Show the actual image when loaded -->
                     <img v-if="isLoaded" v-bind="imgAttrs" :src="src" class="rounded-xl object-contain">
@@ -44,8 +36,8 @@ onMounted(async () => {
                     <Skeleton v-if="!isLoaded" class=" h-12rem bg-red-200 rounded-2xl w-full" />
                 </NuxtImg>
 
-                <!-- <div v-if="!isLoading && data" class="mt1">
-                    <h2 class="text-base font-extrabold">{{ data[0].artist_name }}</h2>
+                <!-- <div v-if="!isLoading && animeImageStore.images" class="mt1">
+                    <h2 class="text-base font-extrabold">{{ animeImageStore.images[0].artist_name }}</h2>
                 </div> -->
             </div>
             <div
@@ -53,8 +45,8 @@ onMounted(async () => {
                 <Skeleton v-if="isLoading" class=" h-12rem bg-green-200 rounded-2xl !w-full" />
 
 
-                <NuxtImg v-if="!isLoading && data" :src="data[1].url" alt=""
-                    class="rounded-xl object-contain mxa h-12rem wmax " width="100" height="150" :custom="true"
+                <NuxtImg v-if="!isLoading && animeImageStore.images" :src="animeImageStore.images[1].url" alt=""
+                    class="rounded-xl object-contain mxa h-12rem wmax " :custom="true"
                     v-slot="{ src, isLoaded, imgAttrs }">
 
                     <!-- Show the actual image when loaded -->
@@ -64,8 +56,8 @@ onMounted(async () => {
                     <Skeleton v-if="!isLoaded" class=" h-12rem bg-green-200 rounded-2xl w-full" />
                 </NuxtImg>
 
-                <!-- <div v-if="!isLoading && data" class="mt1">
-                    <h2 class="text-base font-extrabold">{{ data[1].artist_name }}</h2>
+                <!-- <div v-if="!isLoading && animeImageStore.images" class="mt1">
+                    <h2 class="text-base font-extrabold">{{ animeImageStore.images[1].artist_name }}</h2>
                 </div> -->
             </div>
             <div
@@ -73,8 +65,9 @@ onMounted(async () => {
                 <Skeleton v-if="isLoading" class=" h-12rem bg-blue-200 rounded-2xl !w-full" />
 
 
-                <NuxtImg v-if="!isLoading && data" :src="data[2].url" alt=""
-                    class="rounded-xl object-contain mxa h-12rem wmax " width="100" height="150" :custom="true"
+
+                <NuxtImg v-if="!isLoading && animeImageStore.images" :src="animeImageStore.images[2].url" alt=""
+                    class="rounded-xl object-contain mxa h-12rem wmax " :custom="true"
                     v-slot="{ src, isLoaded, imgAttrs }">
 
                     <!-- Show the actual image when loaded -->
@@ -84,8 +77,9 @@ onMounted(async () => {
                     <Skeleton v-if="!isLoaded" class=" h-12rem bg-blue-200 rounded-2xl w-full" />
                 </NuxtImg>
 
-                <!-- <div v-if="!isLoading && data" class="mt1">
-                    <h2 class="text-base font-extrabold">{{ data[2].artist_name }}</h2>
+
+                <!-- <div v-if="!isLoading && animeImageStore.images" class="mt1">
+                    <h2 class="text-base font-extrabold">{{ animeImageStore.images[2].artist_name }}</h2>
                 </div> -->
             </div>
 

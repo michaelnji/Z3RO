@@ -11,8 +11,8 @@ const formattedGreeting = computed(() => {
 })
 </script>
 <template>
-    <div class="max-w-screen hdvh px6 max-h-dvh">
-        <div class="h-40% ">
+    <div class="max-w-screen px6">
+        <div>
             <!-- clock -->
             <div class="pt10 mxa  flex justify-center items-center">
                 <Clock />
@@ -20,11 +20,11 @@ const formattedGreeting = computed(() => {
             <div class=" mxa p6 flex justify-center items-center">
                 <h1 class=" leading-none font-medium tracking-wide text-3xl">{{ formattedGreeting }}</h1>
             </div>
-            <div class="mt4 max-w-6xl mxa">
+            <div class="my4 max-w-6xl mxa">
                 <TabManager :tab="currentTab" @tab-change="(e) => currentTab = e" />
             </div>
         </div>
-        <div class="  p6 overflow-x-hidden wfull rounded-t-3xl glass-no-shadow !h-60% mxa">
+        <div class="hfull  p6 overflow-x-hidden wfull rounded-t-3xl glass-no-shadow  mxa">
             <OverviewTab v-if="currentTab === 'overview'" />
         </div>
     </div>
