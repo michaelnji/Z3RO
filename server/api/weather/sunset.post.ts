@@ -49,8 +49,8 @@ export default eventHandler(async (event) => {
            setResponseStatus(event, 400)
            return sendServerResponse(400, 'Invalid payload, fields have incorrect types')
        }
-
-        const constructedUrl = `https://api.sunrise-sunset.org/json?lat=${body.lat}&lng=${body.lng}&formatted=${body.formatted}&date=${body.date}&tzid=${body.tzid}`
+       const config = useRuntimeConfig();
+				const constructedUrl = `${config.sunsetUrl}?lat=${body.lat}&lng=${body.lng}&formatted=${body.formatted}&date=${body.date}&tzid=${body.tzid}`;
 
         const resp = await $fetch(constructedUrl)
         const data = resp as DayInfo
