@@ -22,7 +22,10 @@ export default defineNuxtConfig({
 		"nuxt-time",
 	],
 	// css: ['~/assets/css/tailwind.css'],
-
+	piniaPluginPersistedstate: {
+		storage: "localStorage",
+		key: "z3ro_%id_storekey",
+	},
 	icon: {
 		customCollections: [
 			{

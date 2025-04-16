@@ -22,8 +22,9 @@ const instruments = [
 
     }
 ]
+const ratesStore = useRatesStore()
+
 const isLoading = ref(true)
-const priceData = ref<{ pair: string, rate: number }[]>([])
 onMounted(async () => {
     try {
         const reqBody = []
@@ -34,14 +35,8 @@ onMounted(async () => {
                 quote: item.name.split('/')[1]
             });
         }
-        const resp = await $fetch<ServerResponse<StatusCode, PairRate[]>>('/api/finance/rates', {
-            method: 'POST',
-            body: reqBody
-        })
-        if (resp.ok && resp.data) {
-            isLoading.value = false
-            priceData.value = resp.data
-        }
+        await ratesStore.fetchRatesFromStorage(reqBody)
+        isLoading.value = false;
 
     } catch (error) {
         console.log(error)
@@ -54,7 +49,8 @@ onMounted(async () => {
         <div class="rounded-3xl bg-white p6">
             <h2 class="font-medium text-2xl">Instrument Watchlist</h2>
             <div class="mt3 grid grid-cols-2 gap-3">
-                <div class="rounded-2xl p3 bg-stone-100" v-if="!isLoading" v-for="item, k in instruments">
+                <div class="rounded-2xl p3 bg-stone-100" v-if="!isLoading && ratesStore.rates.length >= 1"
+                    v-for="item, k in instruments">
                     <div class="flex items-center gap-x-3">
                         <div class=" rounded-full grid place-items-center overflow-hidden">
                             <Icon :name="item.icon" size="30" />
@@ -62,7 +58,7 @@ onMounted(async () => {
                         <p class="text-lg">{{ item.name }}</p>
                     </div>
                     <h2 class="font-extrabold font-mono mt2 text-3xl">${{
-                        Intl.NumberFormat('us').format(priceData[k].rate).toString() }}
+    Intl.NumberFormat('us').format(ratesStore.rates[k].rate).toString() }}
                     </h2>
                     <!-- <div class="flex items-end gap-x-1">
                         <Icon name="solar:alt-arrow-down-bold"  class="text-red-400" v-if="item.change < 0" size="26" />
