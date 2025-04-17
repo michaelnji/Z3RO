@@ -70,5 +70,6 @@ export default defineNuxtConfig({
 		currencyApiKey: "",
 		animeUrl: "",
 		sunsetUrl: "",
+		quotesUrl: "",
 	},
 });

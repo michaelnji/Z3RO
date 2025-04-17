@@ -44,9 +44,15 @@ export type PairRate = {
 	pair: string;
 	rate: number;
 };
+
+export type Quote = {
+	author: string;
+	quote: string;
+};
+
 export type StatusCode = 200 | 400 | 404 | 403 | 500 | 401;
 export type ErrorCodes = 400 | 404 | 403 | 500 | 401;
-export type ServerData = null | DayInfo | NekoImage[] | PairRate[];
+export type ServerData = null | DayInfo | NekoImage[] | PairRate[] | Quote;
 export interface ServerResponse<
     Status extends StatusCode,
     Data extends ServerData,
