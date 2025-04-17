@@ -1,13 +1,17 @@
 <script lang="ts" setup>
+import { usePermission } from '@vueuse/core';
 import { format, secondsToHours } from 'date-fns';
 import timezones from 'timezones-list';
 import type { DayInfo, ServerResponse, StatusCode } from '~/server/types/index.types';
 const isLoading = ref(true)
 const currentTz = timezones.find((x) => x.utc === format(useNow().value, 'xxx'))?.tzCode
-const { coords, error, resume, pause } = useGeolocation()
 const data = ref<DayInfo | null>(null)
 onMounted(async () => {
     try {
+
+        const geolocationAccess = usePermission('geolocation')
+        console.log(geolocationAccess)
+        const { coords } = useGeolocation()
 
         const reqBody: {
             lat: number,
@@ -22,7 +26,7 @@ onMounted(async () => {
             formatted: 0,
             tzid: currentTz ?? 'UTC'
         }
-        console.log(coords.value)
+        // console.log(coords.value)
         if (Number.isFinite(coords.value.latitude) && Number.isFinite(coords.value.longitude)) {
             const response = await $fetch<ServerResponse<StatusCode, DayInfo>>('/api/weather/sunset', {
                 body: reqBody,
@@ -34,7 +38,7 @@ onMounted(async () => {
                 console.log(data)
             }
         }
-        else { console.log(error.value) }
+
 
     } catch (error) {
         console.log(error)
