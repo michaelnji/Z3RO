@@ -10,5 +10,6 @@ import { userTheme } from "./theme.config";
 export default defineConfig({
 	presets: [presetWind4(), presetRemToPx()],
 	transformers: [transformerCompileClass(), transformerVariantGroup()],
-	theme: userTheme,
+	theme: userTheme
+
 });

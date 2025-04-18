@@ -1,5 +1,19 @@
 // Define your branding colors & fonts here
 export const userTheme = {
+	font: {
+		adblox: 'Adblox',
+		nixav: 'UT Defghio Nixav',
+		'acro-mono': 'AcroMono',
+		panton: 'panton',
+		uni: 'Uni Sans Heavy',
+		espial: 'EspialRegular15-6Y08Y',
+		action: 'Action_Man',
+		fifa: 'fifawelcome',
+		intro: 'Intro',
+		japanese: 'Japanese',
+		product: "Product Sans",
+		sans: "Product Sans"
+	},
 	colors: {
 		puce: {
 			DEFAULT: "#d496a7",
@@ -61,11 +75,5 @@ export const userTheme = {
 			800: "#daebf9",
 			900: "#ecf5fc",
 		},
-	},
-	fontFamily: {
-		mono: "Roboto Mono",
-		display: "Lagistha",
-		body: "Poppins",
-		sans: "Poppins",
 	},
 };
