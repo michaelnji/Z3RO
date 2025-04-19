@@ -1,4 +1,4 @@
-import type { ErrorCodes, ServerData, StatusCode } from "~/server/types";
+import type { ErrorCodes, ServerData, StatusCode } from "../types/index.types";
 
 /**
  * Sends a server response for an unsuccessful request.
@@ -42,24 +42,23 @@ export function sendServerResponse(status: 200, message: string, data: ServerDat
 export function sendServerResponse(status: StatusCode | ErrorCodes, message?: string, data?: ServerData,) {
 
     if (status === 200) {
-        const res = {
+
+        return {
             status,
             data,
             message,
             ok: true
 
         }
-
-        return res
     }
 
-    const res = {
+
+
+    return {
         status,
         message,
         ok: false
 
     }
-
-    return res
 
 }

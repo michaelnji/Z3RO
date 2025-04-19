@@ -34,17 +34,17 @@ const instruments = [
 ]
 const ratesStore = useRatesStore()
 
+const buildReqBody = (instruments:{name:string,icon:string}[]) =>
+  instruments.map(item => ({
+    pair: item.name,
+    base: item.name.split('/')[0],
+    quote: item.name.split('/')[1]
+  }));
+
 const isLoading = ref(true)
 onMounted(async () => {
     try {
-        const reqBody = []
-        for (const item of instruments) {
-            reqBody.push({
-                pair: item.name,
-                base: item.name.split('/')[0],
-                quote: item.name.split('/')[1]
-            });
-        }
+        const reqBody = buildReqBody(instruments)
         await ratesStore.fetchRatesFromStorage(reqBody)
         isLoading.value = false;
 
@@ -56,14 +56,7 @@ onMounted(async () => {
 const refreshContent = async () => {
     isLoading.value = true
     try {
-        const reqBody = []
-        for (const item of instruments) {
-            reqBody.push({
-                pair: item.name,
-                base: item.name.split('/')[0],
-                quote: item.name.split('/')[1]
-            });
-        }
+      const reqBody = buildReqBody(instruments)
         await ratesStore.fetchRates(reqBody)
         isLoading.value = false;
 

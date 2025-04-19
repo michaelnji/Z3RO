@@ -27,8 +27,7 @@ onMounted(async () => {
 
 
                 <NuxtImg v-if="!isLoading && animeImageStore.images" :src="animeImageStore.images[0].url" alt=""
-                    class="rounded-xl object-contain mxa h-12rem wmax " :custom="true"
-                    v-slot="{ src, isLoaded, imgAttrs }">
+                    class="rounded-xl object-contain mxa  wmax " :custom="true" v-slot="{ src, isLoaded, imgAttrs }">
                     <!-- Show the actual image when loaded -->
                     <img v-if="isLoaded" v-bind="imgAttrs" :src="src" class="rounded-xl object-contain">
 
@@ -46,8 +45,7 @@ onMounted(async () => {
 
 
                 <NuxtImg v-if="!isLoading && animeImageStore.images" :src="animeImageStore.images[1].url" alt=""
-                    class="rounded-xl object-contain mxa h-12rem wmax " :custom="true"
-                    v-slot="{ src, isLoaded, imgAttrs }">
+                    class="rounded-xl object-contain mxa  wmax " :custom="true" v-slot="{ src, isLoaded, imgAttrs }">
 
                     <!-- Show the actual image when loaded -->
                     <img v-if="isLoaded" v-bind="imgAttrs" :src="src" class="rounded-xl object-contain">
@@ -67,8 +65,7 @@ onMounted(async () => {
 
 
                 <NuxtImg v-if="!isLoading && animeImageStore.images" :src="animeImageStore.images[2].url" alt=""
-                    class="rounded-xl object-contain mxa h-12rem wmax " :custom="true"
-                    v-slot="{ src, isLoaded, imgAttrs }">
+                    class="rounded-xl object-contain mxa  wmax " :custom="true" v-slot="{ src, isLoaded, imgAttrs }">
 
                     <!-- Show the actual image when loaded -->
                     <img v-if="isLoaded" v-bind="imgAttrs" :src="src" class="rounded-xl object-contain">

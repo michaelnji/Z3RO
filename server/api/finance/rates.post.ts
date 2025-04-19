@@ -1,6 +1,6 @@
 import type {
 	CurrencyBeaconResponse,
-	DayInfo,
+	ErrorCodes
 } from "~/server/types/index.types";
 import { sendServerResponse } from "~/server/utils/response";
 
@@ -53,7 +53,7 @@ export default eventHandler(async (event) => {
 
 			if (resp.meta.code !== 200) {
 				setResponseStatus(event, resp.meta.code);
-				return sendServerResponse(resp.meta.code, resp.meta.disclaimer);
+				return sendServerResponse(resp.meta.code as ErrorCodes, resp.meta.disclaimer);
 			}
             
 			if (resp.response?.rates) {
@@ -77,6 +77,7 @@ export default eventHandler(async (event) => {
 		return sendServerResponse(200, "success", data);
 	} catch (error) {
 		setResponseStatus(event, 500);
+		console.log(error)
 		let message: string;
 		if (error instanceof Error) {
 			message = error.message;

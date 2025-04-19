@@ -5,14 +5,16 @@
   <div>
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
       <div class="space-y-4">
-        <DeviceInfo />
-        <TimeMetrics/>
-        <Football/>
+        <Football />
+        <FoodieBase />
       </div>
-      <Watchlist />
+      <div class="space-y-4">
+        <Watchlist />
+        <DeviceInfo />
+      </div>
       <div class="space-y-4">
         <Quote />
-        <PicOfDay/>
+        <PicOfDay />
       </div>
     </div>
   </div>

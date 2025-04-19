@@ -14,7 +14,7 @@ const formattedDate = computed(() => {
 </script>
 <template>
     <div class="flex flex-col justify-center items-center">
-        <h1 class=" font-panton clock font-bold leading-none  tracking-wide text-9xl">{{ formattedTime }}</h1>
+        <h1 class=" font-espial clock font-bold leading-none  tracking-wide text-9xl">{{ formattedTime }}</h1>
 
         <div class="flex mt2 items-center justify-between gap-x-6">
             <div class="flex items-center gap-1">

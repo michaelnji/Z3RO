@@ -24,7 +24,7 @@ const formattedGreeting = computed(() => {
                 <TabManager :tab="currentTab" @tab-change="(e) => currentTab = e" />
             </div>
         </div>
-        <div class="hfull  p6 overflow-x-hidden wfull rounded-t-3xl glass-no-shadow  mxa">
+        <div class="  p6 overflow-x-hidden wfull rounded-t-3xl glass-no-shadow  mxa">
             <OverviewTab v-if="currentTab === 'overview'" />
         </div>
     </div>
