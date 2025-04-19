@@ -12,7 +12,7 @@ function size(v: number) {
     return `${kb.toFixed(2)} MB`
 }
 
-const { charging, chargingTime, dischargingTime, level } = useBattery()
+const { charging, level } = useBattery()
 </script>
 <template>
     <div>

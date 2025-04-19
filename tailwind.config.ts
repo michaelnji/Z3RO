@@ -2,6 +2,8 @@ import type { Config } from "tailwindcss";
 import { userTheme } from "./theme.config";
 
 export default (<Partial<Config>>{
-	theme: userTheme,
+	theme: {
+		extend: userTheme
+	},
 
 });

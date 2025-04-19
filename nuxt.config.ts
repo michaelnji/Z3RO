@@ -71,5 +71,6 @@ export default defineNuxtConfig({
 		animeUrl: "",
 		sunsetUrl: "",
 		quotesUrl: "",
+		foodUrl: '',
 	},
 });

@@ -67,12 +67,16 @@ export default eventHandler(async (event) => {
 		return sendServerResponse(200, "success", quoteData);
 	} catch (error) {
 		setResponseStatus(event, 500);
+		console.log(error)
 		let message: string;
-		if (error instanceof Error && error.message.includes("fetch failed")) {
-			message = "fetch failed";
+		if (error instanceof Error) {
+			message = error.message;
 		} else {
-			message = "Internal Server Error";
+			message = String(error);
 		}
-		return sendServerResponse(500, message);
+		return sendServerResponse(
+			500,
+			message.includes("fetch failed") ? "fetch failed" : message,
+		);
 	}
 });

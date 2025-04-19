@@ -1,4 +1,23 @@
 /**
+ * Checks if localStorage is available and functioning in the current environment.
+ * 
+ * @returns {boolean} True if localStorage is available and working, false otherwise.
+ * This function attempts to write and remove a test key to verify localStorage functionality.
+ * It will return false if localStorage is not available or if any errors occur during the test.
+ */
+function isLocalStorageAvailable(): boolean {
+	try {
+		const testKey = "__ls_test__";
+		localStorage.setItem(testKey, testKey);
+		localStorage.removeItem(testKey);
+		return true;
+	} catch {
+		return false;
+	}
+}
+
+
+/**
  * Retrieves an item from localStorage by key or sets it if it doesn't exist.
  * 
  * @param key - The key to retrieve or set in localStorage.
